@@ -1,7 +1,7 @@
 {
   "name": "conversor-moedas",
   "version": "1.0.0",
-  "homepage": "https://miiura.github.io/projeto-fullstack",
+  "homepage": "https://msimonae.github.io/engwebdevops",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
