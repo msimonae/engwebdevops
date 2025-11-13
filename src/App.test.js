@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+// Nome do teste atualizado
+test('renders currency converter header', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  // Procura pelo título "Conversor de Moedas" que existe no seu app
+  const headingElement = screen.getByText(/Conversor de Moedas/i);
+  expect(headingElement).toBeInTheDocument();
 });
