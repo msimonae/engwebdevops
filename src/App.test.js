@@ -4,7 +4,13 @@ import App from './App';
 // Nome do teste atualizado
 test('renders currency converter header', () => {
   render(<App />);
-  // Procura pelo título "Conversor de Moedas" que existe no seu app
-  const headingElement = screen.getByText(/Conversor de Moedas/i);
+
+  // Procura pelo cabeçalho (role 'heading') de nível 1 (<h1>)
+  // que contenha o texto "Conversor de Moedas".
+  const headingElement = screen.getByRole('heading', { 
+    name: /Conversor de Moedas/i, 
+    level: 1 
+  });
+
   expect(headingElement).toBeInTheDocument();
 });
