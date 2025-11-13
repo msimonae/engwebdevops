@@ -36,6 +36,11 @@ jobs:
       # Passo 3: Instalar as dependências do projeto (os "ingredientes" do package.json)
       - name: Install dependencies
         run: npm install
+      # ======================================================
+      # === NOVO PASSO ADICIONADO AQUI ===
+      # ======================================================
+      - name: Run unit tests
+        run: npm test -- --watchAll=false
 
       # Passo 4: Construir o site (o "assar o bolo")
       # O comando 'npm run build' cria a pasta 'build' com o site pronto
