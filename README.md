@@ -8,5 +8,5 @@ O pipeline deve primeiro rodar os testes. Se algum teste falhar, o pipeline para
 Foi adicikonado os comandos abaixo:
       - name: Run unit tests
         run: npm test -- --watchAll=false
-      # Usamos --watchAll=false para o Jest (testador do React)
-      # rodar os testes uma vez e sair, em vez de ficar "assistindo".
+        Usamos --watchAll=false para o Jest (testador do React)
+        rodar os testes uma vez e sair, em vez de ficar "assistindo".
