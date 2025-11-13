@@ -40,6 +40,9 @@
   "jest": {
     "transformIgnorePatterns": [
       "/node_modules/(?!axios)"
-    ]  
+    ],
+    "moduleNameMapper": {
+      "\\.css$": "identity-obj-proxy"
+    }  
   }
 }
