@@ -6,7 +6,7 @@ Aluno : Marcelo Massashi Simonae
 Link da aplicação atualizada pelo Deploy para testes : https://msimonae.github.io/engwebdevops/
 O pipeline deve primeiro rodar os testes. Se algum teste falhar, o pipeline para, e o site não é publicado (deployado). Isso garante que você nunca envie código com bugs para a produção.(Atualizado em 13/11/2025)
 # ======================================================
-# === NOVO PASSO ADICIONADO AQUI ===
+# === NOVO PASSO de teste ADICIONADO AQUI ===
 # ======================================================
       - name: Run unit tests
         run: npm test -- --watchAll=false
