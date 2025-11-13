@@ -1,64 +1,64 @@
-# 1. Nome do seu pipeline
-name: Deploy React App to GitHub Pages
+# Nome do seu pipeline
+name: Test, Build and Deploy React App
 
-# 2. Gatilho: Quando o pipeline deve rodar?
+# Gatilho
 on:
-  # Roda toda vez que você enviar um 'push' (commit) para a branch 'main'
   push:
     branches:
       - main
-  # Permite que você rode este pipeline manualmente pela aba "Actions"
   workflow_dispatch:
 
-# 3. Permissões: O que o robô tem permissão para fazer
+# Permissões
 permissions:
   contents: read
-  pages: write      # Permissão para escrever nas GitHub Pages
-  id-token: write   # Permissão para se autenticar
+  pages: write
+  id-token: write
 
-# 4. Tarefas (Jobs): O que o robô vai fazer
+# Tarefas (Jobs)
 jobs:
-  build-and-deploy:
-    # O robô vai usar uma máquina virtual Linux (Ubuntu)
+  test-build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # Passo 1: Baixar sua cópia do código
+      # Passo 1: Baixar o código
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Passo 2: Instalar o Node.js (o "ambiente" React)
+      # Passo 2: Instalar o Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18' # Usar uma versão estável (LTS)
-          cache: 'npm'       # Salvar pacotes para rodar mais rápido no futuro
+          node-version: '18'
+          cache: 'npm'
 
-      # Passo 3: Instalar as dependências do projeto (os "ingredientes" do package.json)
+      # Passo 3: Instalar as dependências
       - name: Install dependencies
         run: npm install
+
       # ======================================================
-      # === NOVO PASSO ADICIONADO AQUI ===
+      # === CORREÇÃO ESTÁ AQUI ===
       # ======================================================
       - name: Run unit tests
-        run: npm test -- --watchAll=false
+        env: # <--- Adicionamos esta seção
+          CI: true
+        run: npm test # <--- Removemos o '--watchAll=false'
+      # Isso força o create-react-app a rodar os testes
+      # apenas uma vez e sair sem modo interativo.
 
-      # Passo 4: Construir o site (o "assar o bolo")
-      # O comando 'npm run build' cria a pasta 'build' com o site pronto
+      # Passo 5: Construir o site (só roda se os testes passarem)
       - name: Build project
         run: npm run build
 
-      # Passo 5: Preparar o GitHub Pages para receber os arquivos
+      # Passo 6: Preparar o GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # Passo 6: Fazer o upload do site pronto (a pasta 'build')
+      # Passo 7: Fazer o upload do site pronto
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Esta é a pasta que o 'npm run build' criou
           path: './build'
 
-      # Passo 7: Publicar o site!
+      # Passo 8: Publicar o site!
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
